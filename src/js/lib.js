@@ -1,6 +1,4 @@
 export function zodiacSign(date, month){
-    // this.date = date;
-    // this.month = month;
     var signs = [
         {name:'козерог', month:1, date:20},
         {name:'водолей', month:2, date:20},
@@ -13,20 +11,14 @@ export function zodiacSign(date, month){
         {name:'дева',    month:9, date:23},
         {name:'весы',    month:10,date:23},
         {name:'скорпион',month:11,date:22},
-        {name:'стрелец', month:12,date:21}
+        {name:'стрелец', month:12,date:21},
+        {name:'козерог', month:13, date:20}
         ];
-    if (signs[month % signs.length].date < date){
+    if (signs[month - 1].date <= date){
         return signs[month].name;
     } else {
         return signs[month - 1].name;
-    }
-    // this.showZodiacSign = function (target){
-    //     if(signs[target.month-1].date <= target.date ){
-    //         return signs[target.month].name        
-    //     } else { 
-    //         return signs[target.month - 1].name;
-    //     }
-    // }   
+    }   
 }
 
 /////////////////// задача 2 /////////////////////
@@ -34,7 +26,6 @@ export function normolized(arr, n){
     const newArr = arr.slice().sort(function(a,b){
        return a - b;
     });
-    console.log('newARR ' + newArr)
     const removedElem = newArr.splice(n, newArr.length - (2*n));
     return removedElem;
 }
@@ -43,16 +34,22 @@ export function normolized(arr, n){
 
 ///////////////////// задача 3 /////////////////////////
 export function uniq(data){
-    let sorted_arr = data.slice().sort(function(a,b){
-        return a - b;
-     });
-    let results = [];
-    for (let i = 0; i <= sorted_arr.length; i++) {
-        if (sorted_arr[i + 1] !== sorted_arr[i]) {
-            results.push(sorted_arr[i]);
+    // const arr = data.slice();
+    // const uniqueArray = arr.filter(function(item, pos, arr) {
+    //     return arr.indexOf(item) == pos;
+    // })
+    // return uniqueArray;
+    let count = 0;
+    for(var i=0; i<data.length; ++i) {
+        for(var j=i+1; j<data.length; ++j) {
+            if(data[i] === data[j]){
+                data.splice(j--, 1);
+                count++;
+            }
         }
     }
-    return results;
+    // const result = data.splice(0, count) 
+    return data;
 }
 
 
